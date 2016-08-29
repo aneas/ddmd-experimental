@@ -1,0 +1,44 @@
+{
+	"name": "ddmd-experimental",
+	"description": "Experimental library of the dmd frontend (currently Linux-only)",
+	"copyright": "Copyright © 1999-2015, Digital Mars",
+	"authors": ["Walter Bright"],
+	"license": "BSL-1.0",
+	"excludedSourceFiles": [
+		"source/ddmd/backend/*.d",
+		"source/ddmd/vcbuild/*.d",
+		"source/ddmd/tocsym.d",
+		"source/ddmd/objc.d",
+		"source/ddmd/irstate.d",
+		"source/ddmd/toctype.d",
+		"source/ddmd/todt.d",
+		"source/ddmd/checkwhitespace.d",
+		"source/ddmd/idgen.d",
+		"source/ddmd/scanmach.d",
+		"source/ddmd/libmach.d",
+		"source/ddmd/scanmscoff.d",
+		"source/ddmd/libmscoff.d"
+	],
+	"versions": [
+		"NoBackend"
+	],
+	"sourcePaths": [
+		"source"
+	],
+	"importPaths": [
+		"source"
+	],
+	"stringImportPaths": [
+		"res"
+	],
+	"preGenerateCommands": [
+		"mkdir -p \"$PACKAGE_DIR/source\"",
+		"ln -Tsf ../src \"$PACKAGE_DIR/source/ddmd\"",
+
+		"mkdir -p \"$PACKAGE_DIR/res\"",
+		"echo v2.071.2-b2 > \"$PACKAGE_DIR/res/verstr.h\"",
+		"echo /etc > \"$PACKAGE_DIR/res/SYSCONFDIR.imp\"",
+
+		"cd \"$PACKAGE_DIR/src\"; rdmd idgen.d"
+	]
+}
